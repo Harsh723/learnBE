@@ -1,0 +1,1 @@
+"type": "module" -> I want to use import syntax (es6) not require syntax
