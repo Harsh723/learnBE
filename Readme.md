@@ -10,3 +10,9 @@ npm i -D nodemon
 "scripts": {
     "dev": "nodemon src/index.js"
   },
+
+MongoDB Atlas provide Fully managed MongoDB in the cloud.
+
+note : mongodb+srv://harsh:<your-pwd>@cluster0.1zdoqy2.mongodb.net/ remove / while this in .env file
+
+Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env
