@@ -21,4 +21,12 @@ app.use(express.static("public")) //to serve the static files from public/static
 
 app.use(cookieParser()) //to set and get the cookie on browser
 
+
+//route imports
+import userRouter from "./routes/user.routes.js"
+
+//routes declarations
+app.use("/api/v1/users", userRouter); //instead of directly doing app.post we took help of middleware to send the user of "/api/v1/users" to userRoute
+//It is a standard practice so that our app.js file look clean i.e we created our separate routes folder to define routes
+//when user hit http://localhost:8000/api/v1/users/register --> userRouter --> router checks if /register is mention in the url if yes then --> registerUser --> send the response
 export { app };
