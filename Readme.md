@@ -16,3 +16,5 @@ MongoDB Atlas provide Fully managed MongoDB in the cloud.
 note : mongodb+srv://harsh:<your-pwd>@cluster0.1zdoqy2.mongodb.net/ remove / while this in .env file
 
 Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env
+
+https://passwordsgenerator.net/sha256-hash-generator/ - to generate the SHA256 hash of any string
