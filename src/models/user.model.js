@@ -58,7 +58,7 @@ userSchema.pre("save", async function (next) {
   //pre middleware function will be called everytime before saving any data
   if (!this.isModified("password")) return next(); //isModified is mongoose inbuilt fn to check wether field is modified or not
 
-  this.password = bcrypt.hash(this.password, 10);
+  this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 
@@ -99,3 +99,6 @@ userSchema.methods.generateRefreshToken = function () {
 };
 
 export const User = mongoose.model("User", userSchema);
+
+//User we have created using mongoose which means it can connect to db directly and do some operation fo us if required
+//you can check one of usage in user controller where we are checking if user exit in db 

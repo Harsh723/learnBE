@@ -28,6 +28,7 @@ const uploadOnCloudinary = async (localFilePath) => {
     }
 }
 
+export { uploadOnCloudinary };
 //localFilePath ? 
 //So the concept is instead of uploading the file directly to cloudinary , will fisrt store the file locally.
 //locally will store with help of multer and then will take the localfilePath to store to cloudinary.
