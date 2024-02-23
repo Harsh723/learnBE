@@ -4,26 +4,29 @@ import fs from "fs";
 cloudinary.config({ 
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
   api_key: process.env.CLOUDINARY_API_KEY, 
-  api_secret: CLOUDINARY_API_SECRET 
+  api_secret: process.env.CLOUDINARY_API_SECRET 
 });
 
 
 const uploadOnCloudinary = async (localFilePath) => {
+    console.log('local', localFilePath)
     try{
         if(!localFilePath) return null;
 
         //upload the file on cloudinary
         const response = await cloudinary.uploader.upload(localFilePath, {
-            resource_type : auto //we are saying cloudinary to check itself which type of file is being uploaded
+            resource_type : "auto" //we are saying cloudinary to check itself which type of file is being uploaded
         })
         
         //file has been uploaded successfully
         console.log("file is uploaded on cloudinary", response.url);
 
+        fs.unlinkSync(localFilePath); //as file is uploaded on cloudinary so there is no need to keep it on local path
+
         return response; //returning entire response to FE and let them decide which property is required for them
 
     } catch(error) {
-        fs.unlink(localFilePath); // remove the locally saved temporary file as the  upload operation to cloudinary got failed
+        fs.unlinkSync(localFilePath); // remove the locally saved temporary file as the  upload operation to cloudinary got failed
         return null;
     }
 }

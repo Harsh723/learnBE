@@ -26,7 +26,7 @@ const registerUser = asyncHandler( async (req,res) => {
 
     //advance level code file is not empty
     if(
-        [fullname,email,username,password].some(field => field?.trim() === "") //if eny feild is empty , it will return true
+        [fullname,email,username,password].some(field => field?.trim() === "" || field?.trim() === undefined) //if eny feild is empty , it will return true
     ) {
         throw new ApiError(400, "All fields are required")
     }
@@ -34,7 +34,7 @@ const registerUser = asyncHandler( async (req,res) => {
     //we can add multiple validation as well , for example - email format, fullname should have only alphabets etc..
 
     //to check user already exits or not
-    const existedUser = User.findOne({ //with User which can connect directly to db , we can check if username or email already exist in db
+    const existedUser = await User.findOne({ //with User which can connect directly to db , we can check if username or email already exist in db
         $or: [{ username } , { email }] //to check multiple feilds in mongodb we can use this syntax $or
     })
 
@@ -44,10 +44,10 @@ const registerUser = asyncHandler( async (req,res) => {
 
     console.log('pathhhh', req.files);
     const avatarLocalPath = req.files?.avatar[0]?.path;
-    const coverImageLocalPath = req.files?.coverImage[0]?.path;
+    const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
 
     if(!avatarLocalPath){
-        throw new ApiError(400, "Avatar file is required")
+        throw new ApiError(400, "Avatar file is required here")
     }
 
     //step - upload images to cloudinary
